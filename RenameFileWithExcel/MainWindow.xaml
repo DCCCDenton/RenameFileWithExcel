@@ -1,0 +1,29 @@
+﻿<Window x:Class="RenameFileWithExcel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RenameFileWithExcel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,0,-6">
+        <Button Content="Open Excel" 
+                Margin="193,217,528,177"
+                Command="{Binding OpenExcelFileCommand}"/>
+        <Button Content="Open Folder" 
+                Margin="74,218,647,176"
+                Command="{Binding SelectFolderCommand}"/>
+        <Button Content="Run" 
+                Margin="360,295,360,99"
+                Command="{Binding RunCommand}"/>
+
+        <TextBox Margin="618,227,128,177" TextWrapping="Wrap" Text="{Binding NameColumn}"/>
+        <TextBox Margin="539,227,201,177" TextWrapping="Wrap" Text="{Binding BpmColumn}"/>
+        <ComboBox 
+                  Margin="320,220,360,179" 
+                  Width="120"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding Worksheets, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedWorksheet, UpdateSourceTrigger=PropertyChanged}" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" />
+    </Grid>
+</Window>
