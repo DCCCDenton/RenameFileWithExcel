@@ -13,16 +13,16 @@ namespace RenameFileWithExcel.ViewModel
 {
     public partial class RenameFileViewModel : ObservableObject
     {
-        private string FilePath { get; set; }
-        private string FolderPath { get; set; }
-        private XLWorkbook Workbook { get; set; }
+        private string? FilePath { get; set; }
+        private string? FolderPath { get; set; }
+        private XLWorkbook? Workbook { get; set; }
         private List<ExcelCell> ExcelContent { get; set; } = new();
         private ExcelService ExcelService { get; set; } = new();
 
         [ObservableProperty]
-        private List<IXLWorksheet> worksheets;
+        private List<IXLWorksheet>? worksheets;
         [ObservableProperty]
-        private IXLWorksheet selectedWorksheet;
+        private IXLWorksheet? selectedWorksheet;
         [ObservableProperty]
         private int nameColumn = 1;
         [ObservableProperty]
@@ -48,8 +48,8 @@ namespace RenameFileWithExcel.ViewModel
         [RelayCommand]
         private void Run()
         {
-            RenameService renameService = new();
             ExcelContent = ExcelService.ReadExcel(Workbook, SelectedWorksheet.Name);
+            RenameService renameService = new();
             renameService.RenameFiles(FolderPath, ExcelContent, NameColumn, BpmColumn);
         }
     }

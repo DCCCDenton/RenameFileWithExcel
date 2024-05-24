@@ -1,4 +1,5 @@
 ﻿using RenameFileWithExcel.Data;
+using RenameFileWithExcel.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace RenameFileWithExcel.Services
 {
-    internal class RenameService
+    internal class RenameService : IRenameService
     {
-        internal void RenameFiles(string folderPath, List<ExcelCell> excelContent, int nameColumn, int bpmColumn)
+        public void RenameFiles(string folderPath, List<ExcelCell> excelContent, int nameColumn, int bpmColumn)
         {
             string[] filesPath = Directory.GetFiles(folderPath, "*.mp3", SearchOption.AllDirectories);
             foreach (string filePath in filesPath)
@@ -23,8 +24,7 @@ namespace RenameFileWithExcel.Services
                     string prefix = FindBPM(excelContent, filePath, nameColumn, bpmColumn);
                     RenameFile(filePath, prefix);
                 }
-                catch { }
-                
+                catch { }                
             }
         }
         private void RenameFile(string filePath, string prefix = "",  string suffix = "")
